@@ -60,7 +60,58 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T>{
 	
 	@Override
 	public void delete(T data) {
+		if (root != null)
+			root = delete(root, data);
+	}
+
+	private Node<T> delete(Node<T> node, T data) {
+
+		if (node == null)
+			return node;
+
+		if (data.compareTo(node.getData()) < 0) {
+			node.setLeft(delete(node.getLeft(), data));
+		} else if (data.compareTo(node.getData()) > 0) {
+			node.setRight(delete(node.getRight(), data));
+		} else {
+
+			// we have found the node we want to remove !!!
+			if (node.getLeft() == null && node.getRight() == null) {
+				System.out.println("Removing a leaf node...");
+				return null;
+			}
+
+			if (node.getLeft() == null) {
+				System.out.println("Removing the right child...");
+				Node<T> tempNode = node.getRight();
+				node = null;
+				return tempNode;
+			} else if (node.getRight() == null) {
+				System.out.println("Removing the left child...");
+				Node<T> tempNode = node.getLeft();
+				node = null;
+				return tempNode;
+			}
+
+			// this is the node with two children case !!!
+			System.out.println("Removing item with two children...");
+			Node<T> tempNode = getPredecessor(node.getLeft());
+
+			node.setData(tempNode.getData());
+			node.setLeft(delete(node.getLeft(), tempNode.getData()));
+
+		}
+
+		return node;
+	}
+	
+	private Node<T> getPredecessor(Node<T> node) {
 		
+		if( node.getRight() != null )
+			return getPredecessor(node.getRight());
+		
+		System.out.println("Predecessor is: "+node);
+		return node;
 	}
 
 	@Override
