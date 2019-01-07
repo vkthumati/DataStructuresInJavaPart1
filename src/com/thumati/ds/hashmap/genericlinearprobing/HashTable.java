@@ -52,6 +52,7 @@ public class HashTable<K, V> {
 				values[index]=value;
 				return;
 			}
+			index = (index+1) % capacity;
 		}
 		// we have managed to found the array index where we can insert the value --> so update accordingly !!!
 		keys[index]=key;
