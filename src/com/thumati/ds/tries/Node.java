@@ -2,6 +2,7 @@ package com.thumati.ds.tries;
 
 public class Node {
 	private String character;
+	private int value;
 	private Node[] children;
 	private boolean leaf;
 	private boolean visited;
@@ -12,9 +13,23 @@ public class Node {
 	}
 	
 	public void setChild(int index, Node node) {
+		node.setValue(value);
 		this.children[index] = node;
 	}
 	
+	public void setChild(int index, Node node, int value) {
+		node.setValue(value);
+		this.children[index] = node;
+	}
+	
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
 	public Node getChild(int index) {
 		return this.children[index];
 	}
