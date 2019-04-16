@@ -17,7 +17,7 @@ public class SubStringSearch {
 			if(j == lenghtOfPattern) return i;
 		}
 		
-		return lenghtOfText;
+		return -1;
 	}
 	
 	public static void main(String[] args) {
